@@ -9,7 +9,7 @@ let  map = L.map('map').setView([3.5399846,39.0528407], 13);
   }).addTo(map);
 
   function search(value){
-    alert(value.coords.latitude)
+    alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
      var marker = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
   marker.bindPopup("<b>You are here </b><br>.").openPopup();
   }
