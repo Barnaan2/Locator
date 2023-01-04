@@ -1,36 +1,53 @@
 window.onload = ()=>{
-    if(navigator.geolocation){  navigator.geolocation.getCurrentPosition(search);}
+    if(navigator.geolocation){navigator.geolocation.getCurrentPosition(search);}
   };
 
-
+let displayer = document.querySelector(".displayer");
   function search(value){
-
-
-    let  map = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
-
+   let map = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
-    attribution: '&copy; <a href="https://www.github.com/barnaan2">Bernabas Tekkalign</a>'
+    attribution: '&copy; <a href="https://yai-devs.netlify.app/">From Yai</a>'
 }).addTo(map);
 
-    alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
+    // alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
     let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
        yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
+       var popup = L.popup();
 
+       function onMapClick(e) {
+           popup
+               .setLatLng(e.latlng)
+               .setContent("You clicked here")
+               .openOn(map);
+               // e.latlng.toString()
+           
+           
+            let position1 = {}
+            position1.lat = value.coords.latitude;
+            position1.lng = value.coords.longitude;
+
+            displayer.innerHTML = `The clicked Point is ${position(position1,e.latlng)}m  away from you `;
+           
+
+       }
+
+       
+       map.on('click', onMapClick);
       
   }
 
-  var popup = L.popup();
 
-  function onMapClick(e) {
-      popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
-  }
-  
-  map.on('click', onMapClick);
+
+
+
+
+
+
+
+
+
 
 
   //   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
