@@ -1,6 +1,10 @@
 window.onload = ()=>{
-    if(navigator.geolocation){navigator.geolocation.getCurrentPosition(search);}
+    if(navigator.geolocation){navigator.geolocation.watchPosition(search);}
   };
+
+  //const watchID = navigator.geolocation.getCurrentPosition((position) => {
+//   doSomething(position.coords.latitude, position.coords.longitude);
+// });
 
 let displayer = document.querySelector(".displayer");
   function search(value){
@@ -8,7 +12,7 @@ let displayer = document.querySelector(".displayer");
  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
-    attribution: '&copy; <a href="https://yai-devs.netlify.app/">From Yai</a>'
+    attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
 }).addTo(map);
 
     // alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
