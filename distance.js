@@ -5,8 +5,8 @@ let radians =(degree)=>{
 
    let position=(position1,position2)=>{
     pos_diff = {}
-    pos_diff.lat_diff = radians(position2.lat - position1.lat)
-    pos_diff.long_diff = radians(position2.lng - position1.lng)
+    pos_diff.lat_diff = radians(position2.lat )- radians(position1.lat)
+    pos_diff.long_diff = radians(position2.lng) - radians(position1.lng)
    
    
     position1.lat = radians(position1.lat);
@@ -22,17 +22,9 @@ let radians =(degree)=>{
    
    
    function distance (position1,position2,pos_diff){
+    // Earth's radius is given its actually 6371km  which is equal to 6371000m
    const earthRadius = 6371000;
-   let lat1 = position1.lat;
-   let lat2  = position2.lat;
-   let long_diff = pos_diff.long_diff;
-   let lat_diff = pos_diff.lat_diff;
-   
-  
-   let pow1 = Math.pow(Math.sin(lat_diff/2.0),2);
-   let lat_cos = Math.cos(lat1) * Math.cos(lat2);
-   let pow2 = Math.pow(Math.sin(long_diff/2.0),2);
-   let initial = pow1 + lat_cos * pow2;
+    let initial = Math.pow(Math.sin(pos_diff.lat_diff/2.0),2) + Math.cos(position1.lat) * Math.cos(position2.lat) * Math.pow(Math.sin(pos_diff.long_diff/2.0),2);
     let distanceInitial = 2 * Math.atan2(Math.sqrt(initial),Math.sqrt(1-initial));
     let distanceInMeter = earthRadius * distanceInitial;
     return Math.round(distanceInMeter);

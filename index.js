@@ -8,15 +8,17 @@ window.onload = ()=>{
 
 let displayer = document.querySelector(".displayer");
   function search(value){
-   let map = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
+   
+  try{
+    let mapView = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
     attribution: '&copy; <a href="https://yai-devs.netlify.app/" target = "_blank">From Yai</a>'
-}).addTo(map);
+}).addTo(mapView);
 
     // alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
-    let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(map);
+    let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(mapView);
        yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
        var popup = L.popup();
 
@@ -24,23 +26,33 @@ let displayer = document.querySelector(".displayer");
            popup
                .setLatLng(e.latlng)
                .setContent("You clicked here")
-               .openOn(map);
+               .openOn(mapView);
                // e.latlng.toString()
            
            
-            let position1 = {}
-            position1.lat = value.coords.latitude;
-            position1.lng = value.coords.longitude;
-
-            displayer.innerHTML = `The clicked Point is ${position(position1,e.latlng)}m  away from you `;
+            let position1 = new Distance(value.coords.latitude,value.coords.longitude);
+            let position2 = new Distance(e.latlng.lat,e.latlng.lng);
+            // position1.lat = value.coords.latitude;
+            // position1.lng = value.coords.longitude;
+            if(isNaN(position2.lat)|| isNaN(position2.lng)){
+                console.log(position1);
+                console.log(position2);
+            }
+            let diff = Distance.diff(position1.getRadians(),position2.getRadians());
+            displayer.innerHTML = `The clicked Point is ${Distance.distance(position1,position2,diff)}  away from you `;
            
 
        }
 
        
-       map.on('click', onMapClick);
+       mapView.on('click', onMapClick);}
+       catch(e){
+
+        console.log(`${e} There is none sense error `)
+       }
       
   }
+
 
 
 
