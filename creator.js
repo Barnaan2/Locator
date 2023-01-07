@@ -1,9 +1,10 @@
 const creator = {
     name:"Bernabas Tekkalign",
     job:"software developer",
-    github:"github.com/barnaan2",
+    github:"github.com/barnaan2/",
     linkedin:"linkedin.com/in/bernabas-tekkalign",
     twitter:"twitter.com/buliberna",
+    company:"Yai",
     
 }
 
@@ -15,7 +16,7 @@ class Distance {
             this.lng = lng;
 
             if(isNaN(lat)||isNaN(lng)){
-                throw new Error("parameter is not a number ")
+                throw new Error("parameter is not a number. ")
             }
         
        
