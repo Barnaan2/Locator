@@ -1,16 +1,29 @@
 window.onload = ()=>{
-    if(navigator.geolocation){navigator.geolocation.watchPosition(search);}
+   locator();
   };
+
+  function locator(){
+    if(navigator.geolocation){navigator.geolocation.watchPosition(search);}
+    else{
+        alert("Geolocation is not supported by this browser.");
+    }
+  }
+  setInterval(locator,10000);
 
   //const watchID = navigator.geolocation.getCurrentPosition((position) => {
 //   doSomething(position.coords.latitude, position.coords.longitude);
 // });
 
 let displayer = document.querySelector(".displayer");
-  function search(value){
-   
-  try{
-    let mapView = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
+
+
+
+// the search method
+let mapView = {} 
+let yourPosition = {}
+function search(value){
+   try{
+    mapView = L.map('map').setView([value.coords.latitude,value.coords.longitude], 13);
  L.tileLayer('http://{s}.google.com/vt/lyrs=s,p&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
@@ -18,7 +31,7 @@ let displayer = document.querySelector(".displayer");
 }).addTo(mapView);
 
     // alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
-    let yourPosition = L.marker([value.coords.latitude, value.coords.longitude]).addTo(mapView);
+       yourPosition  = L.marker([value.coords.latitude, value.coords.longitude]).addTo(mapView);
        yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
        var popup = L.popup();
 
