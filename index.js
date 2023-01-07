@@ -1,14 +1,15 @@
 window.onload = ()=>{
-   locator();
-  };
-
-  function locator(){
-    if(navigator.geolocation){navigator.geolocation.watchPosition(search);}
+    if(navigator.geolocation){navigator.geolocation.getCurrentPosition(search);}
     else{
         alert("Geolocation is not supported by this browser.");
     }
-  }
-  setInterval(locator,10000);
+  };
+
+ 
+   navigator.geolocation.watchPosition(detect);
+   
+  
+
 
   //const watchID = navigator.geolocation.getCurrentPosition((position) => {
 //   doSomething(position.coords.latitude, position.coords.longitude);
@@ -66,6 +67,11 @@ function search(value){
       
   }
 
+  function detect(me){
+   
+    
+    displayer.innerHTML = `Your position is changing right now  `;
+  }
 
 
 
