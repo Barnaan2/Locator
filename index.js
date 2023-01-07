@@ -39,7 +39,7 @@ let displayer = document.querySelector(".displayer");
                 console.log(position2);
             }
             let diff = Distance.diff(position1.getRadians(),position2.getRadians());
-            displayer.innerHTML = `The clicked Point is ${Distance.distance(position1,position2,diff)}  away from you `;
+            displayer.innerHTML = `The clicked point is ${Distance.distance(position1,position2,diff)}  away from you `;
            
 
        }
