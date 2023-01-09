@@ -6,7 +6,7 @@ window.onload = ()=>{
   };
 
  
-   navigator.geolocation.watchPosition(detect);
+   navigator.geolocation.watchPosition(search);
    
   
 
@@ -67,11 +67,7 @@ function search(value){
       
   }
 
-  function detect(me){
-   
-    
-    displayer.innerHTML = `Your position is changing right now  `;
-  }
+ 
 
 
 
