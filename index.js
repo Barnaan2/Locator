@@ -38,7 +38,7 @@ function search(value){
     // alert(` latitude point is  ${value.coords.latitude} and longitude point is ${value.coords.longitude} `)
        yourPosition  = L.marker([value.coords.latitude, value.coords.longitude])
        console.log(value);
-       cricle = L.circle([value.coords.latitude, value.coords.longitude],{radius:value.coords.accuracy*10})
+       cricle = L.circle([value.coords.latitude, value.coords.longitude],{radius:value.coords.accuracy})
         var feature = L.featureGroup([yourPosition,cricle]).addTo(mapView);
         mapView.fitBounds(feature.getBounds())
        yourPosition.bindPopup("<b>You are here </b><br>").openPopup();
