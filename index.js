@@ -50,7 +50,7 @@ function search(value){
                .openOn(mapView);
                // e.latlng.toString()
            
-            clicked_pos = e.latlng;
+            clicked_pos = e;
             let position1 = new Distance(value.coords.latitude,value.coords.longitude);
             let position2 = new Distance(e.latlng.lat,e.latlng.lng);
             // position1.lat = value.coords.latitude;
@@ -117,7 +117,7 @@ function search(value){
                .openOn(mapView);
                // e.latlng.toString()
            
-            clicked_pos = e.latlng;
+            clicked_pos = e;
             let position1 = new Distance(value.coords.latitude,value.coords.longitude);
             let position2 = new Distance(e.latlng.lat,e.latlng.lng);
             // position1.lat = value.coords.latitude;
